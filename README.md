@@ -57,7 +57,7 @@ Quick check list:
 
 - Learn how to configure WiFi network for Azure Sphere
 - Understand all the concepts in Over-The-Air deployment
-- Learn how to use Azure Sphere utiliy to deploy an Application Over-the-Air
+- Learn how to use Azure Sphere utility to deploy an application Over-the-Air
   
 ## Steps 
 
@@ -144,6 +144,71 @@ Quick check list:
 - [Set up a device group for OS evaluation](https://docs.microsoft.com/en-us/azure-sphere/deployment/set-up-evaluation-device-group)
 
 # Lab-3: Connect to Azure IoT Hub
+
+## Goals
+
+- Hands-on with Azure IoT Hub configuration
+- Understand how will IoT Hub DPS provision Azure Sphere device
+- Understand Azure IoT Hub Device to Cloud message and Device Twin
+- Get familiar with the basics of Azure IoT C device SDK API
+
+## Steps
+
+1. Follow [Setup IoT Hub](https://docs.microsoft.com/en-us/azure-sphere/app-development/setup-iot-hub) pages to setup cloud, the key steps are:
+    
+    - Create Azure IoT Hub and DPS and link them
+    - Upload tenant CA certificate to DPS and finish Proof of Procession
+    - Add a enrollment group in DPS to provision Azure Sphere devices
+
+> Azure IoT Hub DPS service do not allow to use free subscription, You should use a pay-as-you-go subscription for this lab. 
+
+1. After connect Azure Sphere development board to your PC, enable device debug and disable OTA in Azure Sphere utility by:
+   
+   `azsphere device prep-debug`
+
+2. Make sure WiFi credential is configured and Azure Sphere is connected to AP. If Lab-2 is skipped, follow Step 1) and 2) in [Ove-The-Air upgrade](#-Lab-2:-Over-the-Air-upgrade) to setup.
+
+3. Open a solution in Visual Studio and navigate to the folder of *.\azure-sphere-samples\Samples\AzureIoT*, open AzureIoT.sln solution file. Before build the project, there're three key information you need provide to the applicaton in app_manifest.json file.
+   
+   1. The Tenant ID for your Azure Sphere device
+   2. The Scope ID for your device provisioning service (DPS) instance
+   3. The Azure IoT Hub URL for your IoT hub
+   
+   ![](images/manifest.png)
+   
+   This [link](https://github.com/Azure/azure-sphere-samples/blob/master/Samples/AzureIoT/IoTHub.md#configure-the-sample-application-to-work-with-your-azure-iot-hub) provides your information about how to get these information
+
+   > IMPORTANT! DON'T delete the exisiting DPS global endpoint: global.azure-devices-provisioning.net in AllowedConnections
+
+4. You will observer logs showing device is sending simulated telemetry data to IoT Hub after a successful connection. 
+   
+   ![](images/ok-log.png)
+
+    > Azure IoT Hub is the core PaaS that enable reliable and secure bidirectional communications between millions of IoT devices and a cloud solution. It exposes service API for user to integrate your own business backend for data analystic, storage and show. In this Lab, we will use Cloud Explorer Tool in Visual Studio to simulate an user application to retreive data and control IoT device.
+
+5. In Visual Studio, open **View > Cloud Explorer**. Navigate to your Azure subscription, your specific IoT hub resource and select the device reporting data. 
+   
+   Click '**Start Monitoring D2C message**' in Actions tab to start monitoring your D2C messages. 
+
+    ![](images/telemetry.png)
+
+    The Output window will switch to IoT Hub automatically and display message read from IoT Hub.
+
+    ![](images/monitordata.png)
+
+6. Click '**Edit Device Twin**' in Actions tab of Cloud Explorer, a new device-twin.json file will appear and show current device twin json file. To control the device through device twin, add a `StatusLED": { "value": true},`
+under the **desired** filed, and **Save** to update device twin. In a few seconds, LED1 lights up.
+
+    ![](images/twin.png)
+
+
+## Read more
+- [Azure Sphere Application Manifest](https://docs.microsoft.com/en-us/azure-sphere/app-development/app-manifest)
+- [Provisioning device with Azure IoT Hub DPS](https://docs.microsoft.com/en-us/azure/iot-dps/about-iot-dps)
+- [IoT Hub D2C message](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c)
+- [IoT Hub Device Twin](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-device-twinsp)
+- [Azure IoT C SDK](https://github.com/Azure/azure-iot-sdk-c)
+
 
 # Lab-4: Connect to Azure IoT Central 
 
