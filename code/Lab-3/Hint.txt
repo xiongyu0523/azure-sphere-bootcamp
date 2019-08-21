@@ -1,0 +1,22 @@
+static int deviceTwinStatusBlueLedGpioFd = -1;
+
+
+
+
+
+Log_Debug("Opening SAMPLE_RGBLED_BLUE as output\n");
+deviceTwinStatusBlueLedGpioFd = GPIO_OpenAsOutput(SAMPLE_RGBLED_BLUE, GPIO_OutputMode_PushPull, GPIO_Value_High);
+if (deviceTwinStatusBlueLedGpioFd < 0) {
+    Log_Debug("ERROR: Could not open LED: %s (%d).\n", strerror(errno), errno);
+    return -1;
+}
+
+
+
+
+JSON_Object* BlueLedState = json_object_dotget_object(desiredProperties, "BLUE_LED");
+if (BlueLedState != NULL) {
+    statusLedOn = (bool)json_object_get_boolean(BlueLedState, "value");
+    GPIO_SetValue(deviceTwinStatusBlueLedGpioFd, (statusLedOn == true ? GPIO_Value_Low : GPIO_Value_High));
+    TwinReportBoolState("BLUE_LED", statusLedOn);
+}

@@ -208,6 +208,12 @@ Quick check list:
     
     ![](images/twin.png)
 
+## Challenge
+
+Add your own (any) attribute in Device Twin and use it to control the LED2's BLUE ON and OFF.
+
+> BLUE color of LED2 is connected to GPIO10 and has a name SAMPLE_RGBLED_BLUE defined in hardware definition file.
+
 ## Read more
 - [Azure Sphere Application Manifest](https://docs.microsoft.com/en-us/azure-sphere/app-development/app-manifest)
 - [Provisioning device with Azure IoT Hub DPS](https://docs.microsoft.com/en-us/azure/iot-dps/about-iot-dps)
