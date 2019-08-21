@@ -184,23 +184,29 @@ Quick check list:
    
    ![](images/ok-log.png)
 
-    > Azure IoT Hub is the core PaaS that enable reliable and secure bidirectional communications between millions of IoT devices and a cloud solution. It exposes service API for user to integrate your own business backend for data analystic, storage and show. In this Lab, we will use Cloud Explorer Tool in Visual Studio to simulate an user application to retreive data and control IoT device.
+    > Azure IoT Hub is the core PaaS that enable reliable and secure bidirectional communications between millions of IoT devices and a cloud solution. It exposes service API for user to integrate your own business backend for data analystic, storage and show. In this Lab, we will use a tool called **Device Explorer Tool** to simulate an user application to sink data and control IoT device.
 
-5. In Visual Studio, open **View > Cloud Explorer**. Navigate to your Azure subscription, your specific IoT hub resource and select the device reporting data. 
+5. Download and install [DeviceExplorer.msi](https://github.com/Azure/azure-iot-sdk-csharp/releases/download/2019-1-4/SetupDeviceExplorer.msi), a tool write in C# and Azure IoT Service SDK for C#.
+
+6. Go to your IoT Hub portal and find the iothubowner policy's connection string under **shared access policies** setting, click the icon to copy.
    
-   Click '**Start Monitoring D2C message**' in Actions tab to start monitoring your D2C messages. 
+   ![](images/connection-string.png)
 
-    ![](images/telemetry.png)
+7. Open **DevcieExplorer** and paste connection string to the dialog, click **update** to get access to IoT Hub. 
+   
+   ![](images/deviceexplorer.png)
 
-    The Output window will switch to IoT Hub automatically and display message read from IoT Hub.
+8. Go to *Data* tab, ensure the right device is selected and click **Update** button to start monitoring D2C message from device
+   
+   ![](images/data.png)
 
-    ![](images/monitordata.png)
+9.  Cloud to device control is implemented through the Device Twin mechanism in this lab. Go to *management* tab and select your device in the tab, click **Twin Props** button will open the Device Twin window.
 
-6. Click '**Edit Device Twin**' in Actions tab of Cloud Explorer, a new device-twin.json file will appear and show current device twin json file. To control the device through device twin, add a `StatusLED": { "value": true},`
-under the **desired** filed, and **Save** to update device twin. In a few seconds, LED1 lights up.
+    ![](images/management.png)
 
+10. In Device Twin window, add a property `"StatusLED":{"value":true}` under the `"desired"` property and click **Send (use Json format)** button to update the Device Twin. Your device will be notified for this property change and light LED1 on board accordingly.  
+    
     ![](images/twin.png)
-
 
 ## Read more
 - [Azure Sphere Application Manifest](https://docs.microsoft.com/en-us/azure-sphere/app-development/app-manifest)
