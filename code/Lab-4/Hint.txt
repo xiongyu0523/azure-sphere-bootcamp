@@ -1,0 +1,37 @@
+#include "bme280_uesr.h"
+
+
+
+bme280_component_config(SAMPLE_LSM6DS3_I2C);
+
+	
+
+if (iothubAuthenticated) {
+    //SendSimulatedTemperature();
+    SendBME280Data();
+    IoTHubDeviceClient_LL_DoWork(iothubClientHandle);
+}
+
+
+
+void SendBME280Data(void)
+{
+    struct bme280_data sensordata;
+    bme280_component_getdata(&sensordata);
+
+    char tempBuffer[20];
+    int len = snprintf(tempBuffer, 20, "%0.2f", sensordata.temperature);
+    if (len > 0) {
+        SendTelemetry("Temperature", tempBuffer);
+    }
+
+    len = snprintf(tempBuffer, 20, "%0.2f", sensordata.pressure * 0.01);
+    if (len > 0) {
+        SendTelemetry("Pressure", tempBuffer);
+    }
+
+    len = snprintf(tempBuffer, 20, "%0.2f", sensordata.humidity);
+    if (len > 0) {
+        SendTelemetry("Humidity", tempBuffer);
+    }
+}
