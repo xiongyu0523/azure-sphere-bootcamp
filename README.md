@@ -1,21 +1,20 @@
 # Azure-Sphere-Bootcamp
 
-This repo is for Azure Sphere Bootcamp Hands-on day. 
+This repo is built for Azure Sphere Bootcamp Hands-on day. It provides all required information for trainee to follow and finish all hands-on labs. 
 
 # Pre-Lab prerequisites
 
-Follow [Install Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/install/overview) section to complete all neccessary steps before we start labs. 
+Follow [Install Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/install/overview) section to complete all neccessary steps before start. 
 
 Quick check list:
-- FTDI driver is installed and three COMx port are in Device Manager 
-- Visual Studio and Azure Sphere SDK are installed
-- User has registered a Azure account and a free subscription or pay-as-you-go subscription
-- User has logged in Azure Sphere utility by `azsphere login`
-- User has selected Azure Sphere tenant by `azsphere tenant select -i <tenant id>`
+- FTDI driver is installed and three COMx ports are present in Device Manager 
+- Up to date Visual Studio and Azure Sphere SDK are installed
+- Has registered a Azure account and a free subscription or pay-as-you-go subscription
+- Has logged in Azure Sphere command line utility by `azsphere login`
+- (New orgnization ONLY) Create a Azure Sphere tenant by `azsphere tenant create -n <tenant name>`
+- Has selected Azure Sphere tenant by `azsphere tenant select -i <tenant id>`
 - (New device ONLY) Device is claimed to user's tenant by `azsphere device claim`
-- To recover the device by `azsphere device recover`
-
-
+- Device is recovered by `azsphere device recover` command to have a knowning good Azure Sphere OS.
 
 # Lab-1: Blinking LED
 
@@ -39,7 +38,7 @@ Quick check list:
    
  ![](images/open-project.png)
    
-4. LED1 start to blink after Application is loaded. Press **Button A** can adjust the blinking rate. Both LED1 and Button A are connected to GPIO pin and controlled by the high-level Application.
+4. LED1 start to blink after Application is loaded. Press **Button A** will change the blinking rate. Both LED1 and Button A are connected to GPIO pin and controlled by the high-level Application.
 
 5. Select Line 74 and press **F9** to set a breakpoint on function *GPIO_SetValue*, you will see the program is halt and stop on this line. Continue with **F5** and now you can control the ON/OFF state of LED.
 
@@ -55,12 +54,12 @@ Quick check list:
 ## Goals
 
 - Learn how to configure WiFi network for Azure Sphere
-- Understand all the concepts in Over-The-Air deployment
 - Learn how to use Azure Sphere utility to deploy an application Over-the-Air
+- Understand all the concepts in Over-The-Air deployment
   
 ## Steps 
 
-1. Configure the WiFi credentials and allow Azure Sphere to connect Azure Sphere Security Service in the background. Use command:
+1. Configure the WiFi SSID and Password and allow Azure Sphere to connect Azure Sphere Security Service.
    
    `azsphere device wifi add --ssid <yourSSID> --key <yourNetworkKey>`
    
@@ -81,13 +80,13 @@ Quick check list:
 
     `azsphere device-group create --name <device-group-name>`
 
-5. Attach SKU to the device and assign the device into the device group. In the meantime, the following command delete existing applications, disable debug capability. Now device only accept production-siged image from Azure Sphere Security Service (aka AS3). 
+5. Attach SKU to the device and assign the device to the device group. In the meantime, the following command will delete existing applications and disable debug capability. Now device only accept production-siged image from Azure Sphere Security Service (aka AS3). 
 
     `azsphere device prep-field --skuid <productsku-GUID> --devicegroupid <devgroup-GUID>`
 
     At this point, you will see previous loaded LED blink application is not working. 
 
-6. Running command `azsphere device show-ota-config` will see the device related information on AS3, record the *chip SKU* for later use.
+6. Running command `azsphere device show-ota-config` will get the device related information on AS3, record the *chip SKU* for later use.
 
    ![](images/chip-sku.png)
 
