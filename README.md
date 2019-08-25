@@ -11,10 +11,11 @@ Quick check list:
 - Up to date Visual Studio and Azure Sphere SDK are installed
 - Has registered a Azure account and a free subscription or pay-as-you-go subscription
 - Has logged in Azure Sphere command line utility by `azsphere login`
-- (New orgnization ONLY) Create a Azure Sphere tenant by `azsphere tenant create -n <tenant name>`
+- Create a Azure Sphere tenant by `azsphere tenant create -n <tenant name>` if there is no tenant in your orgnization.
 - Has selected Azure Sphere tenant by `azsphere tenant select -i <tenant id>`
 - (New device ONLY) Device is claimed to user's tenant by `azsphere device claim`
 - Device is recovered by `azsphere device recover` command to have a knowning good Azure Sphere OS.
+- [Git](https://git-scm.com/download/win) is installed and added to PATH.
 
 # Lab-1: Blinking LED
 
@@ -94,7 +95,7 @@ Quick check list:
    
    `azsphere component image add --autocreatecomponent --filepath <file_path>`
 
-   The component ID and name are retreived from the *app_manifest.json* file, since the imagepackage already have this metadata. You can also specifiy a name and a GUID for a component using `azsphere component create`, just make sure it should be consistent with the value in manifest.
+   The component ID and name are retreived from the *app_manifest.json* file, since the imagepackage already have this metadata. 
 
     ![](images/component-id.png)
 
@@ -311,7 +312,7 @@ Add your own (any) attribute in Device Twin and use it to control the LED2's BLU
 
     ![](images/datapreview.png)
 
-15. Follow this [page](https://github.com/xiongyu0523/azure-sphere-samples/blob/master/Samples/AzureIoT/IoTCentral.md#add-new-measurements-settings-and-properties) to configure IoT Central application to visulize a state `Orietation` report from device and use toggle setting to control LED1.
+15. Follow this [page](https://github.com/xiongyu0523/azure-sphere-samples/blob/master/Samples/AzureIoT/IoTCentral.md#add-new-measurements-settings-and-properties) to configure IoT Central application to visulize a state `Orientation` report from device and use toggle setting to control LED1.
 
 ## Read more
 
