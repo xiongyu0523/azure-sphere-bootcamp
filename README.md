@@ -91,13 +91,17 @@ Quick check list:
 
    ![](images/chip-sku.png)
 
-7. Upload your application to AS3 and automatically create the component that represent your application:
+7. After a successful build, Visual Studio package your applicaiton with metadata into a *.imagepackage* file for deployment. Upload it to Azure Sphere Security Service and automatically create the component that represent your specific application by:
    
    `azsphere component image add --autocreatecomponent --filepath <file_path>`
 
-   The component ID and name are retreived from the *app_manifest.json* file, since the imagepackage already have this metadata. 
+   -  `<file_path>` parameter should be the absoluate path of imagepackage file included in quotation symbol. 
+        
+        ![](images/path.png)
 
-    ![](images/component-id.png)
+   - The component ID and name are retreived from the *app_manifest.json* file, since the imagepackage already have this metadata. 
+        
+        ![](images/component-id.png)
 
    Write down the image ID for next-step use. This ID represent your current version of application, it changes for each build. 
 
@@ -112,7 +116,7 @@ Quick check list:
     Record the image-set GUID for Step. 10 use.
     ![](images/image-set.png)
 
-9. Create an application feed target to the SKU set (chip SKU + product SKU) and component identified in prevous steps. 
+9.  Create an application feed target to the SKU set (chip SKU + product SKU) and component identified in prevous steps. 
 
     `azsphere feed create --name <feed-name> --componentid <component-id> --chipSkuid <chipsku-GUID> --productskuid <productsku-GUID> --dependentfeedid 3369f0e1-dedf-49ec-a602-2aa98669fd61`
 
@@ -211,7 +215,7 @@ Quick check list:
 
 Add your own (any) attribute in Device Twin and use it to control the LED2's BLUE ON and OFF.
 
-> BLUE color of LED2 is connected to GPIO10 and has a name SAMPLE_RGBLED_BLUE defined in hardware definition file.
+> BLUE color of LED2 is connected to GPIO17 and has a name SAMPLE_RGBLED_BLUE defined in hardware definition file.
 
 ## Read more
 - [Azure Sphere Application Manifest](https://docs.microsoft.com/en-us/azure-sphere/app-development/app-manifest)
