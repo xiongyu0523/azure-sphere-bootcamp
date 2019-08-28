@@ -1,5 +1,7 @@
 # Lab-2: Application Over-the-Air deployment
 
+- Go to [Home Page](README.md)
+
 ## Goals
 
 - Learn how to configure WiFi network for Azure Sphere

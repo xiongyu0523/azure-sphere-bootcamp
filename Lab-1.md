@@ -1,5 +1,7 @@
 # Lab-1: Blinking LED
 
+- Go to [Home Page](README.md)
+
 ## Goals
 
 - Understand the basic sketch of Azure Sphere High-level Applicaiton
