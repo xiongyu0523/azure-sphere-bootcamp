@@ -4,18 +4,27 @@ This repo is built for Azure Sphere Bootcamp Hands-on day. It provides all requi
 
 # Pre-Lab prerequisites
 
-Follow [Install Azure Sphere](https://docs.microsoft.com/en-us/azure-sphere/install/overview) section to complete all neccessary steps before start. 
+Follow [Get started with a development kit](https://docs.microsoft.com/en-us/azure-sphere/install/overview) to complete all neccessary steps before start.
+
+> All hands-on and setup are based on Windows and Visual Studio. Linux and VS Code are not used for this bootcamp
 
 Quick check list:
 - FTDI driver is installed and three COMx ports are present in Device Manager 
-- Up to date Visual Studio and Azure Sphere SDK are installed
-- Has registered a Azure account and a free subscription or pay-as-you-go subscription
-- Has logged in Azure Sphere command line utility by `azsphere login`
+- Up to date Visual Studio and Azure Sphere SDK Preview for **Visual Studio** are installed
+- Has a Microsoft account
+- Has a Azure account and a free subscription or pay-as-you-go subscription
+- Has logged in Azure Sphere command line utility by `azsphere login` or `azsphere login --newuser <email>` when you're not registered/login before.
 - Create a Azure Sphere tenant by `azsphere tenant create -n <tenant name>` if there is no tenant in your orgnization.
 - Has selected Azure Sphere tenant by `azsphere tenant select -i <tenant id>`
 - (New device ONLY) Device is claimed to user's tenant by `azsphere device claim`
 - Device is recovered by `azsphere device recover` command to have a knowning good Azure Sphere OS.
 - [Git](https://git-scm.com/download/win) is installed and added to PATH.
+
+# Azure Sphere MT3620 Starter Kit
+
+This lab uses Azure Sphere MT3620 Starter Kit from AVNET. Detaled information about this hardware can be found in this [community](https://www.element14.com/community/community/designcenter/azure-sphere-starter-kits)
+
+![](images/AzureSphereKit_front.png)
 
 # Labs
 

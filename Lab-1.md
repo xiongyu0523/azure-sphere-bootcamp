@@ -12,19 +12,29 @@
 
 1. Enable device debug and disable OTA in Azure Sphere utility
    
-   `azsphere device prep-debug`
+   `azsphere device enable-development`
 
-2. Clone Azure Sphere Samples repo
+2. Clone Official Azure Sphere Samples repo
 
     `git clone https://github.com/Azure/azure-sphere-samples`
 
-3. Open a project or solution in Visual Studio and navigate to the folder of *.\azure-sphere-samples\Samples\GPIO\GPIO_HighLevelApp*, open GPIO_HighLevelApp.sln and press **F5** to build and load the application onto the device for debugging.
+3. Open a local folder in Visual Studio and navigate to the folder of *.\azure-sphere-samples\Samples\GPIO\GPIO_HighLevelApp*, click **Select Folder** to open the CMake project.
    
- ![](images/open-project.png)
-   
-4. LED1 start to blink after Application is loaded. Press **Button A** will change the blinking rate. Both LED1 and Button A are connected to GPIO pin and controlled by the high-level Application.
+    ![](images/open-project.png)
 
-5. Select Line 74 and press **F9** to set a breakpoint on function *GPIO_SetValue*, you will see the program is halt and stop on this line. Continue with **F5** and now you can control the ON/OFF state of LED.
+4. By default, official sample code are based on MT3620_RDB board. Since we're using AVNET_MT3620_SK for this bootcamp, we need to change the [hardware definition file](https://docs.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies) for our project. Double click CMakeSettings.json file in Solution Explorer, a 'CMake Settings' page will pop, click **Edit JSON** to edit it. 
+    
+    ![](images/cmakesetting.png)
+
+    Change the value of AzureSphereTargetHardwareDefinitionDirectory to avnet_mt3620_sk and save (CTRL+S). A CMake cache generation process will start and complete soon with `'1> CMake generation finished.'` message display at the end. 
+
+5. Select **GDB Debugger (HLCore)** as debug target, then press **F5** to start build and load target application onto device for debugging. 
+   
+   ![](images/HLcoreDebug.png)
+
+6. LED5 start to blink after Application is loaded. Press **Button A** will change the blinking rate. Both LED5 and Button A are connected to GPIO pin and controlled by the high-level Application.
+
+7. Select Line 82 and press **F9** to set a breakpoint on function *GPIO_SetValue*, you will see the program is halt and stop on this line. Continue with **F5** and now you can control the ON/OFF state of LED.
 
  ![](images/debug.png)
 
