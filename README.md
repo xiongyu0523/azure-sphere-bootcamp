@@ -12,8 +12,8 @@ Quick check list:
 - FTDI driver is installed and three COMx ports are present in Device Manager 
 - Up to date Visual Studio and Azure Sphere SDK Preview for **Visual Studio** are installed
 - Has a Microsoft account
-- Has a Azure account and a free subscription or pay-as-you-go subscription
-- Has logged in Azure Sphere command line utility by `azsphere login` or `azsphere login --newuser <email>` when you're not registered/login before.
+- Has a Azure account and a free subscription or pay-as-you-go subscription for Lab-3 and Lab-4
+- Has logged in Azure Sphere command line utility by `azsphere login` or `azsphere login --newuser <MS account>` when you're not registered/login before.
 - Create a Azure Sphere tenant by `azsphere tenant create -n <tenant name>` if there is no tenant in your orgnization.
 - Has selected Azure Sphere tenant by `azsphere tenant select -i <tenant id>`
 - (New device ONLY) Device is claimed to user's tenant by `azsphere device claim`
