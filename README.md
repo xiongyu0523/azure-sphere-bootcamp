@@ -20,11 +20,27 @@ Quick check list:
 - Device is recovered by `azsphere device recover` command to have a knowning good Azure Sphere OS.
 - [Git](https://git-scm.com/download/win) is installed and added to PATH.
 
-# Azure Sphere MT3620 Starter Kit
+# Hardware
 
-This lab uses Azure Sphere MT3620 Starter Kit from AVNET. Detaled information about this hardware can be found in this [community](https://www.element14.com/community/community/designcenter/azure-sphere-starter-kits)
+The hands-on can be used with both MT3620_RDB and AVNET_MT3620_SK. 
+
+## MT3620_RDB
+
+Detaled information about this hardware can be found on [azure-sphere-hardware-designs](https://github.com/Azure/azure-sphere-hardware-designs)
+
+![](images/RDB.png)
+
+## AVNET_MT3620_SK
+
+Detaled information about this hardware can be found in this [community](https://www.element14.com/community/community/designcenter/azure-sphere-starter-kits)
 
 ![](images/AzureSphereKit_front.png)
+
+## BME280 sensor board
+
+To complete Lab-4, a BME280 sensor board is required. The board can be bought from [Alibaba](https://item.taobao.com/item.htm?spm=a1z2k.11010449.931864.2.5bb0509difTEbj&scm=1007.13982.82927.0&id=588033650584&last_time=1575801256)
+
+![](images/BME280.PNG)
 
 # Labs
 
@@ -32,3 +48,10 @@ This lab uses Azure Sphere MT3620 Starter Kit from AVNET. Detaled information ab
 - [Lab-2 Application Over-the-Air deployment](Lab-2.md)
 - [Lab-3 Connect to Azure IoT Hub](Lab-3.md)
 - [Lab-4 Visualize real world data on Azure IoT Central](Lab-4.md)
+
+# Sample Code Disclaimer
+
+**Sample code – No Warranties**
+THE SAMPLE CODE SOFTWARE IS PROVIDED “AS IS” AND WITHOUT WARRANTY. TO THE MAXIMUM EXTENT PERMITTED BY LAW, MICROSOFT DISCLAIMS ANY AND ALL OTHER WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT, OR FITNESS FOR A PARTICULAR PURPOSE, WHETHER ARISING BY A COURSE OF DEALING, USAGE OR TRADE PRACTICE OR COURSE OF PERFORMANCE. In no event shall Microsoft, its licensors, the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use thereof. 
+ 
+This code may contain errors and/or may not operate correctly. Microsoft undertakes no duty to correct any errors or update the software. Your use of this code is optional and subject to any license provided therewith or referenced therein, if any. Microsoft does not provide you with any license or other rights to any Microsoft product or service through the code provided to you.

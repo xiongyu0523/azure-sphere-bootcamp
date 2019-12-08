@@ -1,8 +1,8 @@
-#include "bme280_uesr.h"
+#include "bme280_user.h"
 
 
 
-bme280_component_config(SAMPLE_LSM6DS3_I2C);
+bme280_component_config(MT3620_ISU2_I2C);
 
 	
 

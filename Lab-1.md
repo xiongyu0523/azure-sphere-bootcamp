@@ -22,17 +22,19 @@
    
     ![](images/open-project.png)
 
-4. By default, official sample code are based on MT3620_RDB board. Since we're using AVNET_MT3620_SK for this bootcamp, we need to change the [hardware definition file](https://docs.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies) for our project. Double click CMakeSettings.json file in Solution Explorer, a 'CMake Settings' page will pop, click **Edit JSON** to edit it. 
+4. **(Optional)** If you're using AVNET_MT3620_SK, there're addtional modifications required since official sample code are based on MT3620_RDB board. Azure Sphere OS use[hardware definition file](https://docs.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies) to abstract hardware. Double click CMakeSettings.json file in Solution Explorer, a 'CMake Settings' page will pop, click **Edit JSON** to edit it. 
     
     ![](images/cmakesetting.png)
 
     Change the value of AzureSphereTargetHardwareDefinitionDirectory to avnet_mt3620_sk and save (CTRL+S). A CMake cache generation process will start and complete soon with `'1> CMake generation finished.'` message display at the end. 
 
-5. Select **GDB Debugger (HLCore)** as debug target, then press **F5** to start build and load target application onto device for debugging. 
+    ![](images/avnet.png)
+
+5. Select **GDB Debugger (HLCore)** as debug target and press **F5** to start build and load target application onto device for debugging. 
    
    ![](images/HLcoreDebug.png)
 
-6. LED5 start to blink after Application is loaded. Press **Button A** will change the blinking rate. Both LED5 and Button A are connected to GPIO pin and controlled by the high-level Application.
+6. RED LED start to blink after Application is loaded. Press **Button A** will change the blinking rate. Both LED and Button A are connected to GPIO pin and controlled by the high-level Application.
 
 7. Select Line 82 and press **F9** to set a breakpoint on function *GPIO_SetValue*, you will see the program is halt and stop on this line. Continue with **F5** and now you can control the ON/OFF state of LED.
 
