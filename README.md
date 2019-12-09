@@ -38,9 +38,11 @@ Detaled information about this hardware can be found in this [community](https:/
 
 ## BME280 sensor board
 
-To complete Lab-4, a BME280 sensor board is required. The board can be bought from [Alibaba](https://item.taobao.com/item.htm?spm=a1z2k.11010449.931864.2.5bb0509difTEbj&scm=1007.13982.82927.0&id=588033650584&last_time=1575801256)
+To complete Lab-4, a BME280 sensor board is required. The board can be bought from [Alibaba](https://item.taobao.com/item.htm?spm=a1z2k.11010449.931864.2.5bb0509difTEbj&scm=1007.13982.82927.0&id=588033650584&last_time=1575801256). 
 
  ![](images/bme280.png)
+
+> If you're using AVNET_MT3620_SK and do not have a sensor board, you can refer to Step 16 in [Lab-4](Lab-4.md) to use on-board accelemeter, gyrometer and pressure sensors. 
 
 # Labs
 
