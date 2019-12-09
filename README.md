@@ -40,7 +40,7 @@ Detaled information about this hardware can be found in this [community](https:/
 
 To complete Lab-4, a BME280 sensor board is required. The board can be bought from [Alibaba](https://item.taobao.com/item.htm?spm=a1z2k.11010449.931864.2.5bb0509difTEbj&scm=1007.13982.82927.0&id=588033650584&last_time=1575801256)
 
-![](images/BME280.PNG)
+ ![](images/bme280.png)
 
 # Labs
 
