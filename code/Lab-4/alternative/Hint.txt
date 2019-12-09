@@ -1,0 +1,12 @@
+// include header
+#include "i2cDevice.h"
+
+// remove 'static' keyword in main.c for below variables.
+int epollFd;
+volatile sig_atomic_t terminationRequired;
+IOTHUB_DEVICE_CLIENT_LL_HANDLE iothubClientHandle;
+	
+// place init in InitPeripheralsAndHandlers()
+if (initI2cDevice() == -1) {
+    return -1;
+}

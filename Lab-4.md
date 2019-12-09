@@ -105,6 +105,12 @@
 
     ![](images/datapreview.png)
 
+15. **(Optional)** If you're using AVNET_MT3620_SK and you do not have a BME280 sensor board. You can use the LSM6DSO and LPS22H sensor to send accelemeter, gyrometer and pressure data to IoT central. In Step 5, you need add **gX**, **gY**, **gZ**, **aX**, **aY**, **aZ** and **pressure** as telemetry in device template. 
+
+    ![](images/avnetsensor.png)
+    
+    > Drivers and hint are provided in Code/Lab-4/alternative. Also, you need update CMakeLists.txt file to add i2cDevice.c, lps22hh_reg.c and lsm6dso_reg.c
+
 ## Read more
 
 - [What is Azure IoT Central](https://docs.microsoft.com/en-us/azure/iot-central/overview-iot-central)
