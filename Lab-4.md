@@ -20,13 +20,12 @@
 3. Follow [Setup IoT Central](https://docs.microsoft.com/en-us/azure-sphere/app-development/setup-iot-central) page to setup cloud resources, the key steps are:
     
     - Create Azure IoT Central Application
+    - Select 'Legacy application(2018)'
     - Upload tenant CA certificate to IoT Central and finish Proof of Procession
 
 4. Go to your application in [Azure IoT Central](https://apps.azureiotcentral.com/) and click **Create Device Templates** on the home page, select **Custom** to start a blank template. Give a name to your template and click **Create** button. 
 
     ![](images/AzureSphereTemplate.png)
-
-    > Select P
    
 5. Click **+ New** button and select **Telemetry**
    
@@ -100,7 +99,7 @@
     int bme280_component_getdata(struct bme280_data* pData);
     ```
 
-    > Need update CMakeLists.txt file to add bme280_driver.c and bme280_driver.c to the ADD_EXECUTABLE before build.
+    > Update CMakeLists.txt file to add bme280_driver.c and bme280_driver.c to the ADD_EXECUTABLE before build.
 
 14. After code hack, select **GDB Debugger (HLCore)** and Press F5 to build and run the applicaiton. Go to the device dashboard to check your data.
 
