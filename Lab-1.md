@@ -4,7 +4,7 @@
 
 ## Goals
 
-- Understand the basic sketch of Azure Sphere High-level Applicaiton
+- Understand the basic sketch of Azure Sphere High-level Application
 - Leann how to build & debug Application using Visual Studio
 - Learn how to use GPIO API from Azure Sphere SDK
 
@@ -22,11 +22,11 @@
    
     ![](images/open-project.png)
 
-4. **(Optional)** If you're using AVNET_MT3620_SK, there're addtional modifications required since official sample code are based on MT3620_RDB board. Azure Sphere OS use[hardware definition file](https://docs.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies) to abstract hardware. Double click CMakeSettings.json file in Solution Explorer, a 'CMake Settings' page will pop, click **Edit JSON** to edit it. 
+4. **(Optional)** If you're using AVNET Dev Kit (AVNET_MT3620_SK), there're addtional modifications required as the official sample code are based on SEEED Dev Kit (MT3620_RDB board). Azure Sphere OS use [hardware definition file](https://docs.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies) to abstract hardware. Double click CMakeSettings.json file in Solution Explorer, a 'CMake Settings' page will pop, click **Edit JSON** to edit it. 
     
     ![](images/cmakesetting.png)
 
-    Change the value of AzureSphereTargetHardwareDefinitionDirectory to avnet_mt3620_sk and save (CTRL+S). A CMake cache generation process will start and complete soon with `'1> CMake generation finished.'` message display at the end. 
+    Change the value of *AzureSphereTargetHardwareDefinitionDirectory* to avnet_mt3620_sk and save (CTRL+S). A CMake cache generation process will start and complete soon with `'1> CMake generation finished.'` message display at the end. 
 
     ![](images/avnet.png)
 
@@ -36,7 +36,7 @@
 
 6. RED LED start to blink after Application is loaded. Press **Button A** will change the blinking rate. Both LED and Button A are connected to GPIO pin and controlled by the high-level Application.
 
-7. Select Line 82 and press **F9** to set a breakpoint on function *GPIO_SetValue*, you will see the program is halt and stop on this line. Continue with **F5** and now you can control the ON/OFF state of LED.
+7. Please search for function *BlinkingLedTimerEventHandler* and set a breakpoint on the line where function *GPIO_SetValue* is being called by pressing **F9**, you will see the program is halt and stop on this line. Continue with **F5** and now you can control the ON/OFF state of LED.
 
  ![](images/debug.png)
 

@@ -9,11 +9,11 @@ Follow [Get started with a development kit](https://docs.microsoft.com/en-us/azu
 > All hands-on and setup are based on Windows and Visual Studio. Linux and VS Code are not used for this bootcamp
 
 Quick check list:
-- FTDI driver is installed and three COMx ports are present in Device Manager 
-- Up to date Visual Studio and Azure Sphere SDK Preview for **Visual Studio** are installed
-- Has a Microsoft account
-- Has a Azure account and a free subscription or pay-as-you-go subscription for Lab-3 and Lab-4
-- Has logged in Azure Sphere command line utility by `azsphere login` or `azsphere login --newuser <MS account>` when you're not registered/login before.
+- [FTDI driver](https://www.ftdichip.com/Drivers/VCP.htm) is installed and correctly loaded and three COMx ports are present in Device Manager 
+- Up to date [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) and [Azure Sphere SDK Preview for Visual Studio](https://aka.ms/AzureSphereSDKDownload/VisualStudio) are installed
+- Has a [Microsoft account](https://account.microsoft.com/account) (Mandatory)
+- Has a [Azure global account](https://azure.microsoft.com/en-us/free/) and a pay-as-you-go subscription for Lab-3
+- Has logged in Azure Sphere command line utility by `azsphere login` or `azsphere login --newuser <MS account>` (New user ONLY) with Microsoft account.
 - Create a Azure Sphere tenant by `azsphere tenant create -n <tenant name>` if there is no tenant in your orgnization.
 - Has selected Azure Sphere tenant by `azsphere tenant select -i <tenant id>`
 - (New device ONLY) Device is claimed to user's tenant by `azsphere device claim`
@@ -42,7 +42,7 @@ To complete Lab-4, a BME280 sensor board is required. The board can be bought fr
 
  ![](images/bme280.png)
 
-> If you're using AVNET_MT3620_SK and do not have a sensor board, you can refer to Step 16 in [Lab-4](Lab-4.md) to use on-board accelemeter, gyrometer and pressure sensors. 
+> If you're using AVNET_MT3620_SK and do not have a sensor board, you can refer to Step 16 in [Lab-4](Lab-4.md) to use on-board accelemeter, gyrometer and pressure sensors as alternative solution.
 
 # Labs
 

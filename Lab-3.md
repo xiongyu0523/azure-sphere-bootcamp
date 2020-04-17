@@ -23,11 +23,11 @@
    
    `azsphere device enable-development`
 
-2. Make sure WiFi credential is configured and Azure Sphere is connected to AP. If Lab-2 is skipped, follow Step 1) and 2) in [Ove-The-Air upgrade](Lab-2.md) to setup.
+2. Make sure WiFi credential is configured and Azure Sphere is connected to the WiFi Access Point. If Lab-2 is skipped, please follow Step 1) and 2) in [Ove-The-Air upgrade](Lab-2.md) to configure the WiFi ssid and password.
 
-3. Open AzureIoT project in *.\azure-sphere-samples\Samples\AzureIoT* folder. If you're using **AVNET_MT3620_SK** board, follow Step 4 in [Lab-1](Lab-1.md) to modify hardware definition file first.
+3. Open the AzureIoT project in *.\azure-sphere-samples\Samples\AzureIoT* folder. If you're using **AVNET_MT3620_SK** board, ensure that the hardware definition file is updated. Please refer to Step 4 in [Lab-1](Lab-1.md) to get the hardware definition file updated.
    
-4. Before build the project, there're three key information you need provide to the applicaton in app_manifest.json file.
+4. Before building the project, there are three key information that need to be provided to the applicaton via the app_manifest.json file.
    
    1. The Tenant ID for your Azure Sphere device
    2. The Scope ID for your device provisioning service (DPS) instance
@@ -43,7 +43,7 @@
    
    ![](images/HLcoreDebug.png)
    
-6. You will observer local debug logs showing device is sending simulated telemetry data to IoT Hub after a successful connection. 
+6. From the local device output log window, it shows that the device is currently sending simulated telemetry data to the IoT Hub upon successful connection.
    
    ![](images/ok-log.png)
 
@@ -51,7 +51,7 @@
 
 7. Download and install [Azure IoT Explorer.msi](https://github.com/Azure/azure-iot-explorer/releases/download/v0.10.9/Azure.IoT.explorer.0.10.9.msi), the latest cross-platform management tool for Azure IoT platform
 
-8. Go to your IoT Hub portal and find the iothubowner policy's connection string under **shared access policies** setting, click the icon to copy.
+8. Navigate to your IoT Hub portal and find the iothubowner policy's connection string under **shared access policies** setting, click the icon to copy.
    
    ![](images/connection-string.png)
 
