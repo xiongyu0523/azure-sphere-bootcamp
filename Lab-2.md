@@ -43,7 +43,7 @@
 
     At this point, you will see previous loaded LED blink application is not working. 
 
-5. After a successful build of project, Visual Studio package your applicaiton with metadata into a *.imagepackage* file for deployment. You can find it under `out/ARM-Debug-3/` folder in your project root. Record the full path and used in next step.
+5. After a successful build of project, Visual Studio package your applicaiton with metadata into a *.imagepackage* file for deployment. You can find it under `out/ARM-Debug-4/` or `out/ARM-Deug-4+Beta20xx/` folder in your project root. Record the full path and used in next step.
 
 6. A deployment targets to all device within a device group. Create a deployment to the default Field Test device group of your product by:
 
@@ -52,12 +52,31 @@
 7. Reset the board and wait few minutes, RED LED will start to blink once depolyment is finished.
 
 8. To create a new version of the application and deploy is same as step 6. Every time a new build will generate a different image ID and tracked by AS3. 
+
+9. (option) You can create your Device Group as below. And available to manage App Update / OS Feed Update.
+
+    `azsphere device-group create --name <device-group-name>  --productname <product-name> --osfeed RetailEval --applicationupdate On --description <your-description> `
+
+ 10. (option) Create another app deployment to your Device Group. It's same command with #6 but assign different Device Group Name and ImagePackage.
+
+     `azsphere device-group deployment create --productname <name of product> --devicegroupname <device-group-name> --filepath <path to imagepackage>`
+
+ 11. (option) Remotely update the device to the another device group.
+
+     `azsphere device update --deviceid <your-device-id> --productname <product-name> --devicegroupname <device-group-name>`
     
+     We can check the Device ID from below command.    
+    `azsphere device show-attached`
+
+     In this case, device will be updated within 24hours or just after reboot. So let's press reset button to see result.
+    
+
 ## Challenge
 
 The RGB LED connect to 3 different GPIO of MT3620. Try to change the color of blinking from RED to GREEN through a new deployment over the air!
 
-> Use chip level abstraction `MT3620_GPIO9` for both MT3620_RDB and AVNET_MT3620_SK board. 
+> Use chip level abstraction `MT3620_GPIO9` for both MT3620_RDB and AVNET_MT3620_SK board.
+
 
 ## Read more
 - [Connect Azure Sphere to Wi-Fi](https://docs.microsoft.com/en-us/azure-sphere/network/wifi-including-ble)
