@@ -72,7 +72,7 @@
     2. device ID
     3. device primary key (the key can be found by enter CONNECT dialog on the top right of the device page)
     
-    ![](iamges/devkey.png)
+    ![](images/devkey.png)
 
     ![](images/ShowIoTCentralConfig.png)
 
