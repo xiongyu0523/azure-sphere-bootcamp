@@ -57,9 +57,13 @@
 #include <iothubtransportmqtt.h>
 #include <iothub.h>
 #include <azure_sphere_provisioning.h>
+#include "eventloop_timer_utilities.h"
 
 #define IOT_CENTRAL_APPLICATION
 #define JSON_BUFFER_SIZE 128
+
+#define ExitCode_AccelTimer_Consume	12
+#define ExitCode_Init_AccelTimer	13
 
 /* Private variables ---------------------------------------------------------*/
 static axis3bit16_t data_raw_acceleration;
@@ -74,7 +78,7 @@ static float pressure_hPa;
 static float lps22hhTemperature_degC;
 
 static uint8_t whoamI, rst;
-int accelTimerFd;
+static EventLoopTimer* accelTimer;
 const uint8_t lsm6dsOAddress = LSM6DSO_ADDRESS;     // Addr = 0x6A
 lsm6dso_ctx_t dev_ctx;
 lps22hh_ctx_t pressure_ctx;
@@ -83,8 +87,8 @@ bool lps22hhDetected;
 
 //Extern variables
 int i2cFd = -1;
-extern int epollFd;
-extern volatile sig_atomic_t terminationRequired;
+extern EventLoop* eventLoop;
+extern volatile sig_atomic_t exitCode;
 extern IOTHUB_DEVICE_CLIENT_LL_HANDLE iothubClientHandle;
 
 //Private functions
@@ -140,7 +144,7 @@ static void sendMessage(const char* messagePayload)
 /// <summary>
 ///     Print latest data from on-board sensors.
 /// </summary>
-void AccelTimerEventHandler(EventData *eventData)
+void AccelTimerEventHandler(EventLoopTimer* timer)
 {
 	uint8_t reg;
 	lps22hh_reg_t lps22hhReg;
@@ -150,8 +154,8 @@ void AccelTimerEventHandler(EventData *eventData)
 #endif
 	// Consume the event.  If we don't do this we'll come right back 
 	// to process the same event again
-	if (ConsumeTimerFdEvent(accelTimerFd) != 0) {
-		terminationRequired = true;
+	if (ConsumeEventLoopTimerEvent(timer) != 0) {
+		exitCode = ExitCode_AccelTimer_Consume;
 		return;
 	}
 
@@ -430,15 +434,12 @@ int initI2cDevice(void) {
 
 	// Init the epoll interface to periodically run the AccelTimerEventHandler routine where we read the sensors
 
-	// Define the period in the build_options.h file
-	struct timespec accelReadPeriod = { .tv_sec = 1,.tv_nsec = 0 };
-	// event handler data structures. Only the event handler field needs to be populated.
-	static EventData accelEventData = { .eventHandler = &AccelTimerEventHandler };
-	accelTimerFd = -1;
-	accelTimerFd = CreateTimerFdAndAddToEpoll(epollFd, &accelReadPeriod, &accelEventData, EPOLLIN);
-	if (accelTimerFd < 0) {
-		return -1;
-	}
+    struct timespec azureTelemetryPeriod = {.tv_sec = 1, .tv_nsec = 0};
+	accelTimer =
+        CreateEventLoopPeriodicTimer(eventLoop, &AccelTimerEventHandler, &azureTelemetryPeriod);
+    if (accelTimer == NULL) {
+        return ExitCode_Init_AccelTimer;
+    }
 	
 	return 0;
 }
@@ -448,8 +449,8 @@ int initI2cDevice(void) {
 /// </summary>
 void closeI2cDevice(void) {
 
-	CloseFdAndPrintError(i2cFd, "i2c");
-	CloseFdAndPrintError(accelTimerFd, "accelTimer");
+	close(i2cFd);
+	DisposeEventLoopTimer(accelTimer);
 }
 
 /// <summary>
