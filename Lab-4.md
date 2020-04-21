@@ -69,8 +69,10 @@
     To get **IoT Hub URL**, there is a assist tool in *.\azure-sphere-samples\Samples\AzureIoT\Tools\win-x64* folder can help. In Azure Sphere command line utility, go to above location, and run `ShowIoTCentralConfig.exe`, input 'n' and provide below information, the tool will output the IoT Hub URL.
 
     1. Scope ID
-    2. SAS Primary key (click view keys on above page)
-    3. device ID
+    2. device ID
+    3. device primary key (the key can be found by enter CONNECT dialog on the top right of the device page)
+    
+    ![](iamges/devkey.png)
 
     ![](images/ShowIoTCentralConfig.png)
 
