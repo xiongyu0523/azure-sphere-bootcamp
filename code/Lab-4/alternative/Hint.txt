@@ -2,9 +2,9 @@
 #include "i2cDevice.h"
 
 // remove 'static' keyword in main.c for below variables.
-int epollFd;
-volatile sig_atomic_t terminationRequired;
+volatile sig_atomic_t exitCode = ExitCode_Success;
 IOTHUB_DEVICE_CLIENT_LL_HANDLE iothubClientHandle;
+EventLoop *eventLoop = NULL;
 	
 // place init in InitPeripheralsAndHandlers()
 if (initI2cDevice() == -1) {
