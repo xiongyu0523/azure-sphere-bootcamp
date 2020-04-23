@@ -55,7 +55,7 @@
 
 9. (option) You can create your Device Group as below. And available to manage App Update / OS Feed Update.
 
-    `azsphere device-group create --name <device-group-name>  --productname <product-name> --osfeed RetailEval --applicationupdate On --description <your-description> `
+    `azsphere device-group create --name <device-group-name>  --productname <product-name> --osfeed Retail --applicationupdate On --description <your-description> `
 
  10. (option) Create another app deployment to your Device Group. It's same command with #6 but assign different Device Group Name and ImagePackage.
 
