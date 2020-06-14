@@ -22,11 +22,12 @@
    
     ![](images/open-project.png)
 
-4. **(Optional)** If you're using AVNET Dev Kit (AVNET_MT3620_SK), there're addtional modifications required as the official sample code are based on SEEED Dev Kit (MT3620_RDB board). Azure Sphere OS use [hardware definition file](https://docs.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies) to abstract hardware. Double click CMakeSettings.json file in Solution Explorer, a 'CMake Settings' page will pop, click **Edit JSON** to edit it. 
+4. **(Optional)** If you're using AVNET Dev Kit (AVNET_MT3620_SK), there're addtional modifications required as the official sample code are based on SEEED Dev Kit (MT3620_RDB board). Azure Sphere OS use [hardware definition file](https://docs.microsoft.com/en-us/azure-sphere/app-development/manage-hardware-dependencies) to abstract hardware. Double click CMakeLists.txt file in Solution Explorer.
     
-    ![](images/cmakesetting.png)
+    ![](images/cmakelists.png)
 
-    Change the value of *AzureSphereTargetHardwareDefinitionDirectory* to avnet_mt3620_sk and save (CTRL+S). A CMake cache generation process will start and complete soon with `'1> CMake generation finished.'` message display at the end. 
+    Set the Target Hardware Definition in CMakeLists.txt:
+    - **azsphere_target_hardware_definition** to configure the Hardware Target Definition. 	In this case, please change the value of *TARGET_DIRECTORY* to avnet_mt3620_sk and save (CTRL+S). A CMake cache generation process will start and complete soon with `'1> CMake generation finished.'` message display at the end.
 
     ![](images/avnet.png)
 
