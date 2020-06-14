@@ -1,0 +1,136 @@
+From 70473851a74675a1108d07ea7bba1f4ea3160359 Mon Sep 17 00:00:00 2001
+From: "Chee Weng, TAN" <cheeweng.tan@microsoft.com>
+Date: Wed, 27 May 2020 04:51:54 +0800
+Subject: [PATCH 2/2] AzSphere_Tutorial-Lab-4-Answers
+
+---
+ Samples/AzureIoT/CMakeLists.txt |  4 +--
+ Samples/AzureIoT/main.c         | 44 ++++++++++++++++++++++++++++++---
+ 2 files changed, 43 insertions(+), 5 deletions(-)
+
+diff --git a/Samples/AzureIoT/CMakeLists.txt b/Samples/AzureIoT/CMakeLists.txt
+index 676506e..da181e6 100644
+--- a/Samples/AzureIoT/CMakeLists.txt
++++ b/Samples/AzureIoT/CMakeLists.txt
+@@ -8,12 +8,12 @@ project(AzureIoT C)
+ azsphere_configure_tools(TOOLS_REVISION "20.04")
+ azsphere_configure_api(TARGET_API_SET "5")
+ 
+-add_executable(${PROJECT_NAME} main.c eventloop_timer_utilities.c parson.c)
++add_executable(${PROJECT_NAME} main.c eventloop_timer_utilities.c parson.c i2cDevice.c lps22hh_reg.c lsm6dso_reg.c)
+ target_include_directories(${PROJECT_NAME} PUBLIC ${AZURE_SPHERE_API_SET_DIR}/usr/include/azureiot)
+ target_compile_definitions(${PROJECT_NAME} PUBLIC AZURE_IOT_HUB_CONFIGURED)
+ target_link_libraries(${PROJECT_NAME} m azureiot applibs pthread gcc_s c)
+ 
+-azsphere_target_hardware_definition(${PROJECT_NAME} TARGET_DIRECTORY "../../Hardware/mt3620_rdb" TARGET_DEFINITION "sample_hardware.json")
++azsphere_target_hardware_definition(${PROJECT_NAME} TARGET_DIRECTORY "../../Hardware/avnet_mt3620_sk" TARGET_DEFINITION "sample_hardware.json")
+ 
+ find_program(POWERSHELL powershell.exe)
+ 
+diff --git a/Samples/AzureIoT/main.c b/Samples/AzureIoT/main.c
+index 47cbab8..dc3a9c9 100644
+--- a/Samples/AzureIoT/main.c
++++ b/Samples/AzureIoT/main.c
+@@ -55,6 +55,11 @@
+ #include <iothub.h>
+ #include <azure_sphere_provisioning.h>
+ 
++// Driver Specific
++#if !defined (SIM_TEMP_SENSORDATA)
++#include "i2cDevice.h"
++#endif
++
+ /// <summary>
+ /// Exit codes for this application. These are used for the
+ /// application exit code. They must all be between zero and 255,
+@@ -77,8 +82,9 @@ typedef enum {
+     ExitCode_Init_TwinStatusLed = 8,
+     ExitCode_Init_ButtonPollTimer = 9,
+     ExitCode_Init_AzureTimer = 10,
++	ExitCode_Init_SensorHub = 11,
+ 
+-    ExitCode_IsButtonPressed_GetValue = 11
++    ExitCode_IsButtonPressed_GetValue
+ } ExitCode;
+ 
+ static volatile sig_atomic_t exitCode = ExitCode_Success;
+@@ -87,7 +93,7 @@ static volatile sig_atomic_t exitCode = ExitCode_Success;
+ 
+ // Azure IoT defines.
+ static char *scopeId; // ScopeId for DPS
+-static IOTHUB_DEVICE_CLIENT_LL_HANDLE iothubClientHandle = NULL;
++/*static*/ IOTHUB_DEVICE_CLIENT_LL_HANDLE iothubClientHandle = NULL;
+ static const int keepalivePeriodSeconds = 20;
+ static bool iothubAuthenticated = false;
+ 
+@@ -105,7 +111,20 @@ static const char *GetAzureSphereProvisioningResultString(
+     AZURE_SPHERE_PROV_RETURN_VALUE provisioningResult);
+ static void SendTelemetry(const char *jsonMessage);
+ static void SetupAzureClient(void);
++
++#if defined (SIM_TEMP_SENSORDATA)
++// Function to generate simulated Temperature data/telemetry
+ static void SendSimulatedTelemetry(void);
++
++static int telemetryCount = 0;
++
++#else // Real Live Sensor
++extern void SensorHub_SendData(void);
++
++// Sensor Hub
++static int sensorStatus = ExitCode_Success;
++#endif
++
+ static void ButtonPollTimerEventHandler(EventLoopTimer *timer);
+ static bool IsButtonPressed(int fd, GPIO_Value_Type *oldState);
+ static void AzureTimerEventHandler(EventLoopTimer *timer);
+@@ -134,7 +153,7 @@ static const int AzureIoTMinReconnectPeriodSeconds = 60;      // back off when r
+ static const int AzureIoTMaxReconnectPeriodSeconds = 10 * 60; // back off limit
+ 
+ static int azureIoTPollPeriodSeconds = -1;
+-static int telemetryCount = 0;
++
+ 
+ // State variables
+ static GPIO_Value_Type sendMessageButtonState = GPIO_Value_High;
+@@ -222,11 +241,17 @@ static void AzureTimerEventHandler(EventLoopTimer *timer)
+     }
+ 
+     if (iothubAuthenticated) {
++    #if defined(SIM_TEMP_SENSORDATA) // Simulated Sensor
++        // define for simulated data
+         telemetryCount++;
+         if (telemetryCount == AzureIoTPollPeriodsPerTelemetry) {
+             telemetryCount = 0;
+             SendSimulatedTelemetry();
+         }
++    #else // Real Live Sensor
++        SensorHub_SendData();
++    #endif
++
+         IoTHubDeviceClient_LL_DoWork(iothubClientHandle);
+     }
+ }
+@@ -268,6 +293,19 @@ static ExitCode InitPeripheralsAndHandlers(void)
+         return ExitCode_Init_TwinStatusLed;
+     }
+ 
++#if !defined (SIM_TEMP_SENSORDATA)
++    // Initialize MEMS Sensor
++    Log_Debug("Initializing LSM6DSO + LPS22HH\n");
++    sensorStatus = initI2cDevice();
++    if (sensorStatus == ExitCode_Success) {
++        Log_Debug("Successfully initialize Sensor Hub:(%i).\n", sensorStatus);
++    }
++    else {
++        Log_Debug("ERROR: Fail to initialize Sensor Hub: %s (%d).\n", strerror(errno), errno);
++        return ExitCode_Init_SensorHub;
++    }
++#endif
++
+     // Set up a timer to poll for button events.
+     static const struct timespec buttonPressCheckPeriod = {.tv_sec = 0, .tv_nsec = 1000 * 1000};
+     buttonPollTimer = CreateEventLoopPeriodicTimer(eventLoop, &ButtonPollTimerEventHandler,
+-- 
+2.21.0
+

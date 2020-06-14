@@ -1,0 +1,182 @@
+{
+  "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_130:1",
+  "@type": "CapabilityModel",
+  "implements": [
+    {
+      "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_130:kebmmgizj:1",
+      "@type": "InterfaceInstance",
+      "displayName": {
+        "en": "Interface"
+      },
+      "name": "azsphereSeaBcSensorhub_e3",
+      "schema": {
+        "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:1",
+        "@type": "Interface",
+        "displayName": {
+          "en": "Interface"
+        },
+        "contents": [
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:gX:1",
+            "@type": "Telemetry",
+            "comment": "gX",
+            "displayName": {
+              "en": "gX"
+            },
+            "name": "gX",
+            "displayUnit": {
+              "en": "mg"
+            },
+            "schema": "float"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:gY:1",
+            "@type": "Telemetry",
+            "comment": "gY",
+            "displayName": {
+              "en": "gY"
+            },
+            "name": "gY",
+            "displayUnit": {
+              "en": "mg"
+            },
+            "schema": "float"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:gZ:1",
+            "@type": "Telemetry",
+            "comment": "gZ",
+            "displayName": {
+              "en": "gZ"
+            },
+            "name": "gZ",
+            "displayUnit": {
+              "en": "mg"
+            },
+            "schema": "float"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:aX:1",
+            "@type": "Telemetry",
+            "comment": "aX",
+            "displayName": {
+              "en": "aX"
+            },
+            "name": "aX",
+            "displayUnit": {
+              "en": "dps"
+            },
+            "schema": "float"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:aY:1",
+            "@type": "Telemetry",
+            "comment": "aY",
+            "displayName": {
+              "en": "aY"
+            },
+            "name": "aY",
+            "displayUnit": {
+              "en": "dps"
+            },
+            "schema": "float"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:aZ:1",
+            "@type": "Telemetry",
+            "comment": "aZ",
+            "displayName": {
+              "en": "aZ"
+            },
+            "name": "aZ",
+            "displayUnit": {
+              "en": "dps"
+            },
+            "schema": "float"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:pressure:1",
+            "@type": "Telemetry",
+            "comment": "Pressure",
+            "displayName": {
+              "en": "Atmospheric Press"
+            },
+            "name": "pressure",
+            "displayUnit": {
+              "en": "hPA"
+            },
+            "schema": "double"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:Temperature:1",
+            "@type": "Telemetry",
+            "comment": "Temperature",
+            "displayName": {
+              "en": "Temperature"
+            },
+            "name": "Temperature",
+            "displayUnit": {
+              "en": "*C"
+            },
+            "schema": "float"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:ButtonPress:1",
+            "@type": [
+              "Telemetry",
+              "SemanticType/Event"
+            ],
+            "displayName": {
+              "en": "Button"
+            },
+            "name": "ButtonPress",
+            "schema": "integer"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:TriggerAlarm:1",
+            "@type": "Command",
+            "commandType": "synchronous",
+            "response": {
+              "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:TriggerAlarm:AlarmResult:1",
+              "@type": "SchemaField",
+              "description": {
+                "en": "AlarmResult"
+              },
+              "displayName": {
+                "en": "Alarm Result"
+              },
+              "name": "AlarmResult",
+              "schema": "double"
+            },
+            "description": {
+              "en": "Trigger Alarm"
+            },
+            "displayName": {
+              "en": "Trigger Alarm"
+            },
+            "name": "TriggerAlarm"
+          },
+          {
+            "@id": "urn:azsphereBootcampSea1:azsphereSeaBcSensorhub_e3:StatusLED:1",
+            "@type": "Property",
+            "description": {
+              "en": "Status LED"
+            },
+            "displayName": {
+              "en": "Status LED"
+            },
+            "name": "StatusLED",
+            "writable": true,
+            "schema": "boolean"
+          }
+        ]
+      }
+    }
+  ],
+  "displayName": {
+    "en": "azsphere-sea-bc-sensorhub"
+  },
+  "@context": [
+    "http://azureiot.com/v1/contexts/IoTModel.json"
+  ]
+}

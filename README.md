@@ -49,7 +49,7 @@ To complete Lab-4, a BME280 sensor board is required. The board can be bought fr
 - [Lab-1 Blinking LED](Lab-1.md)
 - [Lab-2 Application Over-the-Air deployment](Lab-2.md)
 - [Lab-3 Connect to Azure IoT Hub](Lab-3.md)
-- [Lab-4 Visualize real world data on Azure IoT Central](Lab-4.md)
+- [Lab-4 Visualize real world data on Azure IoT Central](Lab-4-1.md)
 - [Lab-5 Real-time application programming](Lab-5.md)
 
 # Sample Code Disclaimer
