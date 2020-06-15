@@ -8,3 +8,4 @@
 
 int initI2cDevice(void);
 void closeI2cDevice(void);
+void SensorHub_SendData(void);

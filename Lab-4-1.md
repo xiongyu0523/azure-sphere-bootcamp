@@ -44,7 +44,7 @@
 	
 	Alternatively you may import an existing device capability model template, i.e. [azsphere-bc-avnet-sensorhub.json](code/Lab-4/answer)
 
-	In order to build one, please see the following example: -
+	In order to build one, please see the following example. Start by click `Add Interface` then `Add Capabilitity`
 
 	> **IMPORTANT:** The field *Name* are case sensitive, please ensure you follow the input format of telemetry data name parameter,
 	
@@ -53,15 +53,20 @@
 	![](images/iotcentral_capabilities_2.png)
 
 
-8.  You may use the general default view or add your own customization and selecting the various dashboard views. Before you can connect a device that implements your device capability model, you must publish your device template.  To publish a device template, go to you your device template, and select Publish.
+8. **Save** to 
 
-9. After you had published your newly created template, its time to migrate the existing device to the new template. On the left hand side of the navigation pane, select **Devices** and then choose the device(s) that you want to migrate, then click **Migrate**.  Please select the target template that you intend to migrate to.  **Migrate** will now associate the Device with the device template that was just created / published. Once you have done associating it, the Device Status will show as **Provisioned**.
 
-10. Before proceed to building the project, we need to modify several files and adding new source codes 
+9.  **Save** capability definition and go to **Views**. You may use the general default view or add your own customization and selecting the various dashboard views. Azure IoT Central provide high flexibility and front UI element for your to visualize data. 
+    
+10. Before you can connect a device that implements your device capability model, you must publish your device template.  To publish a device template, go to you your device template, and select **Publish**.
+
+11. After you had published your newly created template, its time to migrate the existing device to the new template. On the left hand side of the navigation pane, select **Devices** and then choose the device(s) that you want to migrate, then click **Migrate**.  Please select the target template that you intend to migrate to.  **Migrate** will now associate the Device with the device template that was just created / published. Once you have done associating it, the Device Status will show as **Provisioned**.
+
+12. Before proceed to building the project, we need to modify several files and adding new source codes 
 	
 	- Please download the [MEMS Sensors (LSM6DSO and LPS22HH) and I2C driver](code/Lab-4/sensorhub_lsm6ds0_lps22hh) source / header files and copy into the project folder root directory (*.\azure-sphere-samples\Samples\AzureIoT*).
 	- Please update the CMake list file ("CMakeLists.txt") to add i2cDevice.c, lps22hh_reg.c and lsm6dso_reg.c to the `ADD_EXECUTABLE` parameter. 
-	- If you're using **AVNET_MT3620_SK** devkit, follow Step 4 in [Lab-1](lab-1.md) to modify target hardware definition file.
+	- Follow Step 4 in [Lab-1](lab-1.md) to modify target hardware definition file since this lab is based on AVNET_MT3620_SK
 	- Grant ISU2 I2C access permission to application in app_manifest.json
 	
 	  ![](images/iotcentral_manifest_isu2.png)
@@ -69,22 +74,27 @@
 	- Last but not least, you will need to make changes to the code to visualize your real world data by 
 	
 		- Iniitializing the I2C Driver and Sensor Hub during peripheral initialization.
+
+            > **HINT:** `#include "i2cDevice.h"` and call `initI2cDevice` function during initialization
+  
 		- Replacing the functions that send simulated data with the Sensor Hub API to send live telemetry data to IoT Central.
 				
-			> **HINT:** `initI2cDevice()` and  `SensorHub_SendData()`
+			> **HINT:** replace `SendSimulatedTelemetry` by `SensorHub_SendData()` in loop
+
+        - Remove `static` scope for variable `iothubClientHandle` to let other file access for simplicity.
 		
 	- **NOTE:** Alternatively, the answers are prepared in git patches. You can apply the following patches: -  		
 		
 		- [0001-Add-I2C-and-Sensor-Drivers.patch](code/Lab-4/answer): Contains the source codes of the I2C driver and on-board MEMS Sensors (LSM6DSO and LPS22HH)
 		- [0002-AzSphere_Tutorial-Lab-4-Answers.patch](code/Lab-4/answer): Answer to the actual changes.  
 		
-	- Please copy the patches (\*.patch) into the project folder root directory (*.\azure-sphere-samples\Samples\AzureIoT*) and use the following git command to apply a patch
+        - Please copy the patches (\*.patch) into the project folder root directory (*.\azure-sphere-samples\Samples\AzureIoT*) and use the following git command to apply a patch
 		
-		- Apply a git patch: `git apply <patch_file>` 
+    		- Apply a git patch: `git apply <patch_file>` 
 			
-			*(Begin applying 0001... then 0002...)*
+			    *(Begin applying 0001... then 0002...)*
 			
-		- Study the code changes: `git diff`
+    		- Study the code changes: `git diff`
 
 11. After finishing all the configuration and code changes, please make sure you perform a clean build.  Select **GDB Debugger (HLCore)** and Press F5 to build and run the application. 
 
