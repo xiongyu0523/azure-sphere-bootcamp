@@ -27,7 +27,8 @@
     ![](images/cmakelists.png)
 
     Set the Target Hardware Definition in CMakeLists.txt:
-    - **azsphere_target_hardware_definition** to configure the Hardware Target Definition. 	In this case, please change the value of *TARGET_DIRECTORY* to avnet_mt3620_sk and save (CTRL+S). A CMake cache generation process will start and complete soon with `'1> CMake generation finished.'` message display at the end.
+    
+    - **azsphere_target_hardware_definition** is a function to configure the Hardware Target Definition. In this case, please change the value of *TARGET_DIRECTORY* to avnet_mt3620_sk and save (CTRL+S). A CMake cache generation process will start and complete soon with `'1> CMake generation finished.'` message display at the end.
 
     ![](images/avnet.png)
 
