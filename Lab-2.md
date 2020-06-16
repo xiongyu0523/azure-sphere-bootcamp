@@ -43,7 +43,7 @@
 
     At this point, you will see previous loaded LED blink application is not working. 
 
-5. After a successful build of project, Visual Studio package your applicaiton with metadata into a *.imagepackage* file for deployment. You can find it under `out/ARM-Debug-4/` or `out/ARM-Deug-4+Beta20xx/` folder in your project root. Record the full path and used in next step.
+5. After a successful build of project, Visual Studio package your applicaiton with metadata into a *.imagepackage* file for deployment. You can find it under `out/ARM-Debug/` folder in your project root. Record the full path and used in next step.
 
 6. A deployment targets to all device within a device group. Create a deployment to the default Field Test device group of your product by:
 
