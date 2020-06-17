@@ -44,6 +44,7 @@
         ```
         #include "logical-intercore.h"
         #include "mt3620-intercore.h"
+        #include "mt3620-baremetal.h"
         ```
 
     - Define task, semaphore and IntercoreComm object
