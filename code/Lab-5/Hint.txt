@@ -1,0 +1,81 @@
+#include "logical-intercore.h"
+#include "mt3620-intercore.h"
+
+TX_SEMAPHORE            semaphore_0;
+TX_THREAD               thread_2;
+IntercoreComm icc;
+
+SetupIntercoreComm(&icc, Notify);
+
+
+tx_byte_allocate(&byte_pool_0, (VOID**)&pointer, DEMO_STACK_SIZE, TX_NO_WAIT);
+
+
+    tx_thread_create(&thread_2,
+        "thread 2",
+        thread_2_entry,
+        0,
+        pointer,
+        DEMO_STACK_SIZE,
+        3,
+        3,
+        TX_NO_TIME_SLICE,
+        TX_AUTO_START);
+
+    tx_semaphore_create(&semaphore_0, "semaphore 0", 0);
+
+
+void Notify(void)
+{
+    UINT status;
+
+    /* Release the semaphore.  */
+    status = tx_semaphore_put(&semaphore_0);
+
+    /* Check status.  */
+    if (status != TX_SUCCESS) {
+        printf("tx_semaphore_put fail\n");
+    }
+}
+
+
+void HandleReceivedMessageDeferred(void)
+{
+    for (;;) {
+        ComponentId sender;
+        uint8_t rxData[32];
+        size_t rxDataSize = sizeof(rxData);
+
+        IntercoreResult icr = IntercoreRecv(&icc, &sender, rxData, &rxDataSize);
+
+        if (icr == Intercore_Recv_NoBlockSize) {
+            return;
+        }
+
+        if (icr != Intercore_OK) {
+            printf("IntercoreRecv: %d\r\n", icr);
+            return;
+        }
+
+        printf("Message size: %d bytes\r\n", rxDataSize);
+        printf("Message content is %s\r\n", &rxData[0]);
+    }
+}
+
+void thread_2_entry(ULONG thread_input)
+{
+    printf("thread 2 start\n");
+    UINT    status;
+
+    while (1)
+    {
+        status = tx_semaphore_get(&semaphore_0, TX_WAIT_FOREVER);
+        if (status != TX_SUCCESS) {
+            printf("tx_semaphore_get fail\n");
+            break;
+        }
+
+        HandleReceivedMessageDeferred();
+        tx_event_flags_set(&event_flags_0, 0x2, TX_OR);
+    }
+}
