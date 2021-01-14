@@ -1,4 +1,4 @@
-# Azure-Sphere-Bootcamp
+# Azure-Sphere-Bootcamp (Refreshed 2021-01)
 
 This repo is built for Azure Sphere Bootcamp Hands-on day. It provides all required information for trainee to follow and finish all hands-on labs. 
 
@@ -6,11 +6,12 @@ This repo is built for Azure Sphere Bootcamp Hands-on day. It provides all requi
 
 Follow [Get started with a development kit](https://docs.microsoft.com/en-us/azure-sphere/install/overview) to complete all neccessary steps before start.
 
-> All hands-on and setup are based on Windows and Visual Studio. Linux and VS Code are not used for this bootcamp
+> All hands-on and setup are based on Windows and Visual Studio 2019. Linux and VS Code are supported but not tested for this bootcamp
 
 Quick check list:
+- [Git](https://git-scm.com/download/win) is installed and added to PATH.
 - [FTDI driver](https://www.ftdichip.com/Drivers/VCP.htm) is installed and correctly loaded and three COMx ports are present in Device Manager 
-- Up to date [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) and [Azure Sphere SDK Preview for Visual Studio](https://aka.ms/AzureSphereSDKDownload/VisualStudio) are installed
+- Up to date [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) and [Azure Sphere SDK for Windows](https://aka.ms/AzureSphereSDKDownload/Windows) are installed
 - Has a [Microsoft account](https://account.microsoft.com/account) (Mandatory)
 - Has a [Azure global account](https://azure.microsoft.com/en-us/free/) and a pay-as-you-go subscription for Lab-3
 - Has logged in Azure Sphere command line utility by `azsphere login` or `azsphere login --newuser <MS account>` (New user ONLY) with Microsoft account.
@@ -18,7 +19,6 @@ Quick check list:
 - Has selected Azure Sphere tenant by `azsphere tenant select -i <tenant id>`
 - (New device ONLY) Device is claimed to user's tenant by `azsphere device claim`
 - Device is recovered by `azsphere device recover` command to have a knowning good Azure Sphere OS.
-- [Git](https://git-scm.com/download/win) is installed and added to PATH.
 
 # Hardware
 
